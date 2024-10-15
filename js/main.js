@@ -183,6 +183,8 @@ function loop() {
   ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
   ctx.fillRect(0, 0, width, height);
   let ballsLeft = 0;
+
+  // Process each ball and update its state
   for (const ball of balls) {
     if (ball.exists) {
       ball.draw();
@@ -190,16 +192,18 @@ function loop() {
       ball.collisionDetect();
       ballsLeft++; // Increment the ball counter for existing balls
     }
-    counter.textContent = "Ball Count: " + ballsLeft;
-    // If no balls are left, show the game over message
-    if (ballsLeft <= 0) {
-      gameover.classList.remove("hidden");
-    }
+  }
+  counter.textContent = "Ball Count: " + ballsLeft;
+  // If no balls are left, show the game over message
+  if (ballsLeft <= 0) {
+    gameover.classList.remove("hidden");
   }
   // Draw and update the evil circle
   evilCircle.draw();
   evilCircle.checkBounds();
   evilCircle.collisionDetect();
+
+  // Call the loop again for the next frame
   requestAnimationFrame(loop);
 }
 
